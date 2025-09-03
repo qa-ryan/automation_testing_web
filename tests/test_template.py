@@ -1,25 +1,12 @@
 from playwright.sync_api import Page, expect
 #This is template file, everything here will be move to specific file
 
-def test_dropdown_menu(page: Page):
-    page.goto("https://www.automationtesting.co.uk/dropdown.html#")
+def test_loader_two(page: Page):
+    page.goto("https://www.automationtesting.co.uk/loadertwo.html")
+    print("\n")
+    page.locator("#loader").wait_for(state="hidden")
     
-    dropdown = page.locator("#cars option")
-    count = dropdown.count()
-
-    items = []
-    for i in range(count):
-        text = dropdown.nth(i).inner_text()
-        items.append(text)
-
-    print("\nDropdown items:", items)
-
-    for item in items:
-        page.locator("#cars").select_option(label=item)
-        selected_value = page.locator("#cars-value")
-        
-        #Expect is not working
-        #expect(selected_value).to_have_text(f"{item}") 
-
-        print(f"✅ Clicked and verified: {item}")
-        
+    loading_complete = page.locator("#appears").text_content()
+    print(loading_complete)
+    
+    expect(page.locator("#appears")).to_have_text("This is a new paragraph that appears after 8 seconds.")

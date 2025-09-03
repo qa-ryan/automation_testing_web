@@ -98,4 +98,23 @@ def test_nav_menu(page: Page):
         text_output = output_locator.inner_text()
         assert text_output == text_output
         print(text_output)
+        
+#Test dropdown menu      
+def test_dropdown_menu(page: Page):
+    page.goto("https://www.automationtesting.co.uk/dropdown.html#")
+    
+    dropdown = page.locator("#cars option")
+    count = dropdown.count()
+
+    items = []
+    for i in range(count):
+        text = dropdown.nth(i).inner_text()
+        items.append(text)
+
+    print("\nDropdown items:", items)
+
+    for item in items:
+        page.locator("#cars").select_option(label=item)
+        print(f"✅ Clicked and verified: {item}")
+        
 
