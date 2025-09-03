@@ -8,6 +8,7 @@ test_data = [
     
 ]
 
+#Test contact form 
 @pytest.mark.parametrize("first_name, last_name, email, comments", test_data)
 def test_contact_us_form(page: Page, first_name, last_name, email, comments):
     page.goto("https://www.automationtesting.co.uk/contactForm.html")

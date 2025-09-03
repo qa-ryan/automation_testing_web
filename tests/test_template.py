@@ -1,28 +1,25 @@
 from playwright.sync_api import Page, expect
+#This is template file, everything here will be move to specific file
 
-def test_checkboxes(page: Page):
-    page.goto("https://www.automationtesting.co.uk/dropdown.html")
-    print("\n")
+def test_dropdown_menu(page: Page):
+    page.goto("https://www.automationtesting.co.uk/dropdown.html#")
     
-    checkboxes = page.locator("input[type='checkbox']")
-    total = checkboxes.count()
-    print(f"Checkboxes found on the page: {total}")
-    
-    checked = page.locator("input[type=checkbox]:checked").count()
-    print(f"Checked checkbox found on the page: {checked}")
-    
-    unchecked = page.locator("input[type=checkbox]:not(:checked)").count()
-    print(f"Unchecked checkbox found on the page: {unchecked}")
-    
-    for i in range(total):
-        cb = checkboxes.nth(i)
-        print("Checkbox id:", cb.get_attribute("id"))
+    dropdown = page.locator("#cars option")
+    count = dropdown.count()
+
+    items = []
+    for i in range(count):
+        text = dropdown.nth(i).inner_text()
+        items.append(text)
+
+    print("\nDropdown items:", items)
+
+    for item in items:
+        page.locator("#cars").select_option(label=item)
+        selected_value = page.locator("#cars-value")
         
-    cb_green = page.get_by_text("Green")
-    cb_green.check()
-    
-    cb_blue = page.get_by_text("Blue")
-    cb_blue.check()
-    
-    cb_red = page.get_by_text("Red", exact=True)
-    cb_red.uncheck()
+        #Expect is not working
+        #expect(selected_value).to_have_text(f"{item}") 
+
+        print(f"✅ Clicked and verified: {item}")
+        

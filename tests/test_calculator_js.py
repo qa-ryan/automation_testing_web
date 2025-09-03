@@ -1,6 +1,6 @@
-import pytest
 from playwright.sync_api import Page, expect
 
+#Test calculator functionality
 def test_full_calculator_functionality(page: Page):
     page.goto("https://www.automationtesting.co.uk/calculator.html")
 

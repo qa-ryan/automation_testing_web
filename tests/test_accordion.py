@@ -1,7 +1,7 @@
 from playwright.sync_api import Page, expect
 
 #Testing functionality, clicking accordions
-def test_case_1(page: Page):
+def test_accordion_functionality(page: Page):
     page.goto("https://www.automationtesting.co.uk/accordion.html")
     
     # Define the accordion headings you want to click
@@ -11,8 +11,9 @@ def test_case_1(page: Page):
     for _ in range(5):   
         for heading in headings:
             page.get_by_text(heading).click()
-    
-def test_case_2(page: Page):
+
+#Testing functionality with conotent validation
+def test_content_validation(page: Page):
     page.goto("https://www.automationtesting.co.uk/accordion.html")
     
     page.get_by_text("Platform Portability").click()

@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from playwright.sync_api import Page
 
+#Work in Progress, still figure out how to check date picker
 #Test Case 1: Typing date directly, bypass clicking element
 def test_basic_datetime_typing(page: Page):
     page.goto("https://www.automationtesting.co.uk/datepicker.html")

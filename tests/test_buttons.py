@@ -27,7 +27,8 @@ def test_count_buttons(page: Page):
     #Print Disable button found
     for idx, btn in enumerate(disabled_buttons, start=1):
         print(f"Disabled button {idx} text: {btn.inner_text()}")
-   
+
+#Test web element button
 def test_web_element_buttons(page: Page):
     prompt_message = None
     
@@ -50,6 +51,7 @@ def test_web_element_buttons(page: Page):
     
     btn_one.click()
 
+#Test button with javascript handler
 def test_javascript_click(page: Page):
     prompt_message = None
     
@@ -76,6 +78,7 @@ def test_javascript_click(page: Page):
                   }
                   """)
 
+#Test action move and click button
 def test_action_move_click(page: Page):
     prompt_message = None
     def handle_prompt(dialog):
@@ -111,6 +114,7 @@ def test_action_move_click(page: Page):
     else:
         print("Button not visible on the page.")
 
+#Validate disabled button
 def test_disabled_button(page: Page):
     page.goto("https://www.automationtesting.co.uk/buttons.html")
     
