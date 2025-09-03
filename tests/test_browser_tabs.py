@@ -22,3 +22,6 @@ def test_browser_tab(page: Page):
         # Close the new tab
         page.bring_to_front()
         #new_tab.close()
+        
+        
+        
