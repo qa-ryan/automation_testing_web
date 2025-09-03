@@ -1,3 +1,5 @@
+from playwright.sync_api import Page, expect
+
 def test_radio_buttons(page: Page):
     page.goto("https://www.automationtesting.co.uk/dropdown.html")
     
