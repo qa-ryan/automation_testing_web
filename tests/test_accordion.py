@@ -1,4 +1,4 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 from pages.accordion_page import AccordionPage
 
 def load_page(page: Page):
@@ -10,6 +10,7 @@ def load_page(page: Page):
 def test_accordion_functionality(page: Page):
     
     load_page(page)
+    print("\n")
     run = AccordionPage(page)
     run.functionality()
     
@@ -17,6 +18,7 @@ def test_accordion_functionality(page: Page):
 def test_content_validation(page: Page):
     
     load_page(page)
+    print("\n")
     run = AccordionPage(page)
     run.content_validation()
     
