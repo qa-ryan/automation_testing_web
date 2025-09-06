@@ -7,4 +7,4 @@ def test_file_upload(page: Page):
     
     submit_btn = page.get_by_role("button", name="Submit")
     submit_btn.click()
-    page.pause()
+    
