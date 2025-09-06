@@ -11,7 +11,7 @@ def test_drag_and_drop(page: Page):
     print("\n")
     run = ActionsPage(page)
     run.drag_and_drop()
-
+    
 #Click and Hold
 def test_click_and_hold(page: Page):
     load_page(page)
@@ -31,5 +31,5 @@ def test_hold_shift_and_click(page: Page):
     load_page(page)
     print("\n")
     run = ActionsPage(page)
-    run.test_hold_and_shift()
+    run.hold_and_shift()
     

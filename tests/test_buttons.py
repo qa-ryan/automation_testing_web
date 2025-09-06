@@ -1,83 +1,26 @@
 from playwright.sync_api import Page, expect
+from pages.buttons_page import ButtonPage
+def load_page(page: Page):
+    url = ButtonPage(page)
+    url.goto()
 
 #Count all buttons found on the page
 def test_count_buttons(page: Page):
-    page.goto("https://www.automationtesting.co.uk/buttons.html")
+    load_page(page)
+    print("\n")
+    run = ButtonPage(page)
+    run.count_button()
     
-    buttons = page.get_by_role("button").all()
-    
-    #Store button that were found on the list
-    enabled_buttons = []
-    disabled_buttons = []
-    
-    for button in buttons:
-        if button.is_enabled():
-            enabled_buttons.append(button)
-        else:
-            disabled_buttons.append(button)
-            
-    print("\nTotal buttons:", len(buttons))
-    print("Enabled buttons:", len(enabled_buttons))
-    print("Disabled buttons:", len(disabled_buttons), "\n")
-    
-    #Print Enable button found 
-    for idx, btn in enumerate(enabled_buttons, start=1):
-        print(f"Enabled button {idx} text: {btn.inner_text()}")
-
-    #Print Disable button found
-    for idx, btn in enumerate(disabled_buttons, start=1):
-        print(f"Disabled button {idx} text: {btn.inner_text()}")
-
 #Test web element button
 def test_web_element_buttons(page: Page):
-    prompt_message = None
+    run = ButtonPage(page)
+    run.web_element_buttons
     
-    def handle_prompt(dialog):
-        nonlocal prompt_message
-        
-        prompt_message = dialog.message
-        
-        print(f"Prompt detected!")
-        print(f"Prompt message: {dialog.message}")
-        print(f"Dialog type: {dialog.type}")
-        dialog.accept()
-    
-    page.on("dialog", handle_prompt)
-    page.goto("https://www.automationtesting.co.uk/buttons.html")
-    
-    btn_one = page.locator("//button[@id='btn_one']")
-    btn_one_text = btn_one.text_content()
-    print(f"\n{btn_one_text}")
-    
-    btn_one.click()
-
 #Test button with javascript handler
 def test_javascript_click(page: Page):
-    prompt_message = None
-    
-    def handle_prompt(dialog):
-        nonlocal prompt_message
-        
-        prompt_message = dialog.message
-        
-        print(f"Prompt detected!")
-        print(f"Prompt message: {dialog.message}")
-        print(f"Dialog type: {dialog.type}")
-        dialog.accept()
-    
-    page.on("dialog", handle_prompt)
-    page.goto("https://www.automationtesting.co.uk/buttons.html")
-    
-    btn_two = page.locator("button#btn_two")
-    btn_two_text = btn_two.text_content()
-    print(f"\n{btn_two_text}")
-    
-    page.evaluate("""
-                  () => {
-                      document.querySelector("button#btn_two").click()
-                  }
-                  """)
-
+    load_page(page)
+    run = ButtonPage(page)
+    run.javascript_click()
 #Test action move and click button
 def test_action_move_click(page: Page):
     prompt_message = None

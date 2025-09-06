@@ -10,8 +10,9 @@ class ActionsPage:
         self.target_locator = page.locator("div:nth-child(3)")
         self.dragdrop_text_validation = page.locator("#demo")
         self.clickhold_text = page.locator("div#click-box")
-        self.dbclick_text = page.locator("#doubleClickArea")
-        
+        self.dbclick_locator = page.locator("#doubleClickArea")
+        self.dbclick_text_before = self.page.get_by_text("Double Click Here")
+        self.dbclick_text_after = self.page.get_by_text("Well Done!")
     def goto(self):
         self.page.goto(self.URL)
         
@@ -54,19 +55,19 @@ class ActionsPage:
     
     def double_click(self):
         #Default text before double click the area
-        text_before_dbclick = self.dbclick_text.first.text_content()
-        expect(self.dbclick_text).to_have_text("Double Click Here")
+        text_before_dbclick = self.dbclick_text_before.first.text_content()
+        expect(self.dbclick_text_before).to_have_text("Double Click Here")
         print(text_before_dbclick)
         
         #Double click area executed
-        self.dbclick_text.first.dblclick()
+        self.dbclick_text_before.first.dblclick()
         
         #Text shown after double click the area
-        text_after_dbclick = self.dbclick_text.first.text_content()
-        expect(self.dbclick_text).to_have_text(" Well Done!")
+        text_after_dbclick = self.dbclick_text_after.first.text_content()
+        expect(self.dbclick_text_after).to_have_text("Well Done!")
         print(text_after_dbclick)
         
-    def test_hold_and_shift(self):
+    def hold_and_shift(self):
         prompt_message = None
         user_input = "Test Input"  
         
@@ -94,7 +95,7 @@ class ActionsPage:
 
         self.page.goto("https://www.automationtesting.co.uk/actions.html")
         
-        element = self.dbclick_text.nth(1)
+        element = self.dbclick_locator.nth(1)
         element.click()
         
         # Perform shift + click action
