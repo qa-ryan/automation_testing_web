@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 class ButtonPage:
     URL = "https://www.automationtesting.co.uk/buttons.html"
@@ -55,6 +55,7 @@ class ButtonPage:
         print(f"\n{btn_one_text}")
         
         btn_one.click()
+        
     def javascript_click(self):
         prompt_message = None
     
@@ -79,4 +80,53 @@ class ButtonPage:
                     () => {
                         document.querySelector("button#btn_two").click()
                     }
-                    """)
+                    """)    
+        
+    def action_move_and_click(self):
+        prompt_message = None
+        def handle_prompt(dialog):
+            nonlocal prompt_message
+            
+            prompt_message = dialog.message
+            
+            print(f"Prompt detected!")
+            print(f"Prompt message: {dialog.message}")
+            print(f"Dialog type: {dialog.type}")
+            dialog.accept()
+            
+        self.page.on("dialog", handle_prompt)
+        self.page.goto("https://www.automationtesting.co.uk/buttons.html")
+        
+        btn_three = self.page.locator("button#btn_three")
+        btn_three_text = btn_three.text_content()
+        print(f"\n{btn_three_text}")
+        
+        box = btn_three.bounding_box()
+        
+        if box:
+            self.page.mouse.move(
+                box["x"] + box["width"] / 2,
+                box["y"] + box["height"] / 2
+            )
+            
+            self.page.mouse.click(
+                box["x"] + box["width"] / 2,
+                box["y"] + box["height"] / 2
+            )
+            print("Mouse moved and clicked using coordinates.")
+        else:
+            print("Button not visible on the page.")
+            
+    def disabled_button(self):
+        btn_four = self.page.locator("button#btn_four")
+        btn_four_text = btn_four.text_content()
+        print(f"\n{btn_four_text}")
+        
+        if btn_four.is_enabled():
+            print("The buttons is enable")
+        elif btn_four.is_disabled():
+            print("The button is disabled")
+        else:
+            print("Can not found button four")
+        
+        expect(self.page.locator("button#btn_four")).to_be_disabled()
