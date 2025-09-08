@@ -6,7 +6,7 @@ class BrowserTabsPage:
     def __init__(self, page:Page):
         self.page = page
     
-    def goto(self):
+    def load_page(self):
         self.page.goto(self.URL)
         
     def browser_tab(self):

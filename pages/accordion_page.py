@@ -10,8 +10,8 @@ class AccordionPage:
     def __init__(self, page: Page):
         self.page = page
         self.text_locator = page.locator("#main")
-        
-    def goto(self):
+    
+    def load_page(self):
         self.page.goto(self.URL)
         
     def functionality(self):

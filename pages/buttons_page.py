@@ -6,7 +6,7 @@ class ButtonPage:
         self.page = page
         self.button_count = page.get_by_role("button")
     
-    def goto(self):
+    def load_page(self):
         self.page.goto(self.URL)
         
     def count_button(self):

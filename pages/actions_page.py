@@ -13,7 +13,8 @@ class ActionsPage:
         self.dbclick_locator = page.locator("#doubleClickArea")
         self.dbclick_text_before = self.page.get_by_text("Double Click Here")
         self.dbclick_text_after = self.page.get_by_text("Well Done!")
-    def goto(self):
+    
+    def load_page(self):
         self.page.goto(self.URL)
         
     def drag_and_drop(self):
