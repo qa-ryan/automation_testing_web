@@ -1,1 +1,18 @@
 from playwright.sync_api import Page, expect
+
+def test_count_iframes(page: Page):
+    page.goto("https://www.automationtesting.co.uk/iframes.html")
+    all_frame = page.frames
+    print("Total frames:", len(all_frame))
+    
+    for frame in all_frame:
+        print("Fame name:", frame.name)
+        print("Frame URL:", frame.url)
+
+def test_iframes_index_html(page: Page):
+    page.goto("https://www.automationtesting.co.uk/iframes.html")
+    frame1 = page.frame_locator("index.html")
+    heading = frame1.locator("#heading")
+    print(heading)
+        
+    
