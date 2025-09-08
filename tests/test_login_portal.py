@@ -1,5 +1,7 @@
 from playwright.sync_api import Page, expect
 import pytest
+from pages.login_portal_page import LoginPortalPage
+
 #This is template file, everything here will be move to specific file
 test_data = [
     ("test", "test123"), #valid
@@ -9,21 +11,12 @@ test_data = [
     ("teest", "teest123")#invalid
 ]
 
-def handle_prompt(dialog):
-    print(f"Prompt detected!")
-    print(f"Prompt message: {dialog.message}")
-    print(f"Dialog type: {dialog.type}")
-    dialog.accept()
-    expect(dialog.message).to_be_visible()
-    
 @pytest.mark.parametrize("username, password", test_data)
 def test_login_portal(page: Page, username, password):
-    page.on("dialog", handle_prompt)
-    page.goto("https://www.automationtesting.co.uk/loginPortal.html")
-    print("\n")
-    page.locator("#login_text").fill(username)
-    page.locator("#login_password").fill(password)
-    page.locator("#login_btn").click()
+    run = LoginPortalPage(page)
+    page.on("dialog", run.handle_prompt)
+    run.load_page()
+    run.login_portal(username, password)
     
     
     
