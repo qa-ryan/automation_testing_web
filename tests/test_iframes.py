@@ -11,8 +11,8 @@ def test_count_iframes(page: Page):
 
 def test_iframes_index_html(page: Page):
     page.goto("https://www.automationtesting.co.uk/iframes.html")
-    frame1 = page.frame_locator("index.html")
-    heading = frame1.locator("#heading")
+    iframe = page.frame_locator("iframe[src='index.html']")
+    heading = iframe.locator("h1").text_content()
+    print("\n")
     print(heading)
-        
     

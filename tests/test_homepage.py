@@ -3,27 +3,16 @@ from pages.home_page import HomePage
 
 
 # Get all link from the page
-def test_case_1(page: Page):
-    home = HomePage(page)
-    home.goto()
-
-    links = home.get_feature_links()
-    print(f"\nCollected {len(links)} links:")
-
-    for idx, (text, href) in enumerate(links, 1):
-        print(f"[{idx}]. {text} -> {href}")
-        assert text != ""
-        assert href != ""
+def test_get_all_link(page: Page):
+    run = HomePage(page)
+    run.load_page()
+    run.get_all_link()
+    
 
 
 # Validate all links that were found
-def test_case_2(page: Page):
-    home = HomePage(page)
-    home.goto()
-
-    links = home.get_feature_links()
-
-    for idx, (text, href) in enumerate(links, 1):
-        print(f"\n[{idx}]. Checking: {text} -> {href}")
-        page.goto(href)
-        expect(page).not_to_have_url("about:blank")
+def test_validate_links(page: Page):
+    run = HomePage(page)
+    run.load_page()
+    run.validate_links()
+    
