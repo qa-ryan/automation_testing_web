@@ -5,6 +5,7 @@ class BrowserTabsPage:
     
     def __init__(self, page:Page):
         self.page = page
+        self.button_open_tab = page.get_by_role("button", name="Open Tab")
     
     def load_page(self):
         self.page.goto(self.URL)
@@ -17,7 +18,7 @@ class BrowserTabsPage:
 
         for target_url in urls:
             with self.page.expect_popup() as popup_info:
-                self.page.get_by_role("button", name="Open Tab").click()
+                self.button_open_tab.click()
 
             new_tab = popup_info.value
             new_tab.wait_for_load_state()

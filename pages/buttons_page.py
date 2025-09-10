@@ -5,6 +5,10 @@ class ButtonPage:
     def __init__(self, page: Page):
         self.page = page
         self.button_count = page.get_by_role("button")
+        self.btn_one = page.locator("//button[@id='btn_one']")
+        self.btn_two = page.locator("button#btn_two")
+        self.btn_three = page.locator("button#btn_three")
+        self.btn_four = page.locator("button#btn_four")
     
     def load_page(self):
         self.page.goto(self.URL)
@@ -50,7 +54,7 @@ class ButtonPage:
         self.page.on("dialog", handle_prompt)
         self.page.goto("https://www.automationtesting.co.uk/buttons.html")
         
-        btn_one = self.page.locator("//button[@id='btn_one']")
+        btn_one = self.btn_one
         btn_one_text = btn_one.text_content()
         print(f"\n{btn_one_text}")
         
@@ -72,7 +76,7 @@ class ButtonPage:
         self.page.on("dialog", handle_prompt)
         self.page.goto("https://www.automationtesting.co.uk/buttons.html")
         
-        btn_two = self.page.locator("button#btn_two")
+        btn_two = self.btn_two
         btn_two_text = btn_two.text_content()
         print(f"\n{btn_two_text}")
         
@@ -97,7 +101,7 @@ class ButtonPage:
         self.page.on("dialog", handle_prompt)
         self.page.goto("https://www.automationtesting.co.uk/buttons.html")
         
-        btn_three = self.page.locator("button#btn_three")
+        btn_three = self.btn_three
         btn_three_text = btn_three.text_content()
         print(f"\n{btn_three_text}")
         
@@ -118,7 +122,7 @@ class ButtonPage:
             print("Button not visible on the page.")
             
     def disabled_button(self):
-        btn_four = self.page.locator("button#btn_four")
+        btn_four = self.btn_four
         btn_four_text = btn_four.text_content()
         print(f"\n{btn_four_text}")
         
@@ -129,4 +133,4 @@ class ButtonPage:
         else:
             print("Can not found button four")
         
-        expect(self.page.locator("button#btn_four")).to_be_disabled()
+        expect(btn_four).to_be_disabled()
